@@ -1,103 +1,103 @@
 package errors
 
 var values = map[string]ErrorDto{
-	"BQ0000000": ErrorDto{
-		ID:     "BQ0000000",
+	"MM0000000": ErrorDto{
+		ID:     "MM0000000",
 		Status: 500,
 		Msg:    "Error Not found",
 	},
-	"BQ0000001": ErrorDto{
-		ID:     "BQ0000001",
+	"MM0000001": ErrorDto{
+		ID:     "MM0000001",
 		Status: 400,
 		Msg:    "Invalid inbound entity",
 	},
-	"BQ0000002": ErrorDto{
-		ID:     "BQ0000002",
+	"MM0000002": ErrorDto{
+		ID:     "MM0000002",
 		Status: 404,
 		Msg:    "Resource not found",
 	},
-	"BQ0000003": ErrorDto{
-		ID:     "BQ0000003",
+	"MM0000003": ErrorDto{
+		ID:     "MM0000003",
 		Status: 500,
 		Msg:    "Undefined Error",
 	},
-	"BQ0000004": ErrorDto{
-		ID:     "BQ0000004",
+	"MM0000004": ErrorDto{
+		ID:     "MM0000004",
 		Status: 500,
 		Msg:    "Connector is down",
 	},
-	"BQ0000005": ErrorDto{
-		ID:     "BQ0000005",
+	"MM0000005": ErrorDto{
+		ID:     "MM0000005",
 		Status: 401,
 		Msg:    "Authentication error",
 	},
-	"BQ0000006": ErrorDto{
-		ID:     "BQ0000006",
+	"MM0000006": ErrorDto{
+		ID:     "MM0000006",
 		Status: 500,
 		Msg:    "private keys errors",
 	},
-	"BQ0000007": ErrorDto{
-		ID:     "BQ0000007",
+	"MM0000007": ErrorDto{
+		ID:     "MM0000007",
 		Status: 500,
 		Msg:    "public keys errors",
 	},
-	"BQ0000008": ErrorDto{
-		ID:     "BQ0000008",
+	"MM0000008": ErrorDto{
+		ID:     "MM0000008",
 		Status: 500,
 		Msg:    "sign token error",
 	},
-	"BQ0000009": ErrorDto{
-		ID:     "BQ0000009",
+	"MM0000009": ErrorDto{
+		ID:     "MM0000009",
 		Status: 415,
 		Msg:    "content-type application/json it's required",
 	},
-	"BQ0000010": ErrorDto{
-		ID:     "BQ0000010",
+	"MM0000010": ErrorDto{
+		ID:     "MM0000010",
 		Status: 500,
 		Msg:    "mysql fatal error",
 	},
-	"BQ0000011": ErrorDto{
-		ID:     "BQ0000011",
+	"MM0000011": ErrorDto{
+		ID:     "MM0000011",
 		Status: 400,
 		Msg:    "unssuported auth algorithm",
 	},
-	"BQ0000012": ErrorDto{
-		ID:     "BQ0000012",
+	"MM0000012": ErrorDto{
+		ID:     "MM0000012",
 		Status: 409,
 		Msg:    "Resource conflict",
 	},
-	"BQ0000013": ErrorDto{
-		ID:     "BQ0000013",
+	"MM0000013": ErrorDto{
+		ID:     "MM0000013",
 		Status: 500,
 		Msg:    "Redis fatal error",
 	},
-	"BQ0000014": ErrorDto{
-		ID:     "BQ0000014",
+	"MM0000014": ErrorDto{
+		ID:     "MM0000014",
 		Status: 500,
 		Msg:    "Unmarshal redis error",
 	},
-	"BQ0000015": ErrorDto{
-		ID:     "BQ0000015",
+	"MM0000015": ErrorDto{
+		ID:     "MM0000015",
 		Status: 404,
 		Msg:    "Redis not found",
 	},
-	"BQ0000016": ErrorDto{
-		ID:     "BQ0000016",
+	"MM0000016": ErrorDto{
+		ID:     "MM0000016",
 		Status: 401,
 		Msg:    "authorization error",
 	},
-	"BQ0000017": ErrorDto{
-		ID:     "BQ0000017",
+	"MM0000017": ErrorDto{
+		ID:     "MM0000017",
 		Status: 400,
 		Msg:    "invalid authorization_token format",
 	},
-	"BQ0000018": ErrorDto{
-		ID:     "BQ0000018",
+	"MM0000018": ErrorDto{
+		ID:     "MM0000018",
 		Status: 401,
 		Msg:    "Token expires",
 	},
-	"BQ0000019": ErrorDto{
-		ID:     "BQ0000019",
+	"MM0000019": ErrorDto{
+		ID:     "MM0000019",
 		Status: 409,
 		Msg:    "Notification conflict",
 	},

@@ -36,7 +36,7 @@ func NewErrorHandler(enviroment, sentryDSN, version string, reportToSentry bool)
 
 		ErrorHandlerInstance = &ErrorHandler{
 			Values:               values,
-			defaultError:         "BQ0000000",
+			defaultError:         "MM0000000",
 			enableReportToSentry: reportToSentry,
 		}
 

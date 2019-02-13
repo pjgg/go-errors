@@ -1,24 +1,20 @@
-
-SRC_PATH=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-VERSION=0.0.1
-
-test:
-	go test -v -tags=unit -coverprofile $(SRC_PATH)/errors/cover.out go.bq.com/pdtdev/go-errors/errors
-	go tool cover -html=$(SRC_PATH)/errors/cover.out -o $(SRC_PATH)/errors/cover.html
-
-clean:
-	rm -rf\
-	 $(SRC_PATH)/dist\
-	 $(SRC_PATH)/debug\
-	 $(SRC_PATH)/*/cover.out\
-	 $(SRC_PATH)/*/cover.html
+REPORT_PATH ?= report
+VERSION = 0.0.1
 
 all: sync test
+
+$(REPORT_PATH):
+	mkdir -p $(REPORT_PATH)
+
+test: | $(REPORT_PATH)
+	go test -v -tags=unit -count=1 -coverprofile $(REPORT_PATH)/cover.out ./...
+	go tool cover -html=$(REPORT_PATH)/cover.out -o $(REPORT_PATH)/cover.html
+
+clean:
+	rm -rf $(REPORT_PATH)
 
 version:
 	@echo $(VERSION)-v$$(basename $(JOB_NAME))$(BUILD_NUMBER)	
 
 sync:
-	- go get -v github.com/kardianos/govendor
-	- cd $(SRC_PATH) && govendor sync
-
+	go mod tidy
