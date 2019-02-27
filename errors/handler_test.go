@@ -79,7 +79,7 @@ type ErrorHandlerTestSuite struct {
 }
 
 func (suite *ErrorHandlerTestSuite) SetupTest() {
-	suite.errHandler = NewErrorHandler("QA", "https://1eecf0d5795b4f9bbc5f4210c1513f4c:35ae8d2ab04144d8a01127612ed810d9@sentry.MM.com/132", "mock", true)
+	suite.errHandler = GetInstance("QA", "https://1eecf0d5795b4f9bbc5f4210c1513f4c:35ae8d2ab04144d8a01127612ed810d9@sentry.MM.com/132", "mock", true)
 }
 
 func TestErrorHandlerTestSuite(t *testing.T) {
