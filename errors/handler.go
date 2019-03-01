@@ -27,7 +27,7 @@ type ErrorHandlerBehavior interface {
 var once sync.Once
 var ErrorHandlerInstance *ErrorHandler
 
-// GetInstance returns a global ErrorHandler instance
+// NewErrorHandler returns a global ErrorHandler instance
 func GetInstance(enviroment, sentryDSN, version string, reportToSentry bool) *ErrorHandler {
 
 	once.Do(func() {
@@ -36,7 +36,7 @@ func GetInstance(enviroment, sentryDSN, version string, reportToSentry bool) *Er
 		var ravenClientInstance *raven.Client
 		if ravenClientInstance, err = raven.New(sentryDSN); err != nil {
 			logrus.Error(err.Error())
-			os.Exit(-1)
+			os.Exit(2)
 		}
 
 		ravenClientInstance.SetEnvironment(enviroment)
@@ -93,7 +93,7 @@ func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
 	tags["sentryCode"] = errorDto.SentryCode
 
 	if eh.enableReportToSentry {
-		go func() { eh.RavenClientInstance.CaptureErrorAndWait(err, tags) }()
+		go func() { eh.RavenClientInstance.CaptureError(err, tags) }()
 	}
 	return errorDto
 }
