@@ -27,7 +27,7 @@ type ErrorHandlerBehavior interface {
 var once sync.Once
 var ErrorHandlerInstance *ErrorHandler
 
-// NewErrorHandler returns a global ErrorHandler instance
+// GetInstance returns a global ErrorHandler instance
 func GetInstance(enviroment, sentryDSN, version string, reportToSentry bool) *ErrorHandler {
 
 	once.Do(func() {
@@ -47,14 +47,13 @@ func GetInstance(enviroment, sentryDSN, version string, reportToSentry bool) *Er
 			Values:               values,
 			defaultError:         "MM0000000",
 			enableReportToSentry: reportToSentry,
-			RavenClientInstance: ravenClientInstance,
+			RavenClientInstance:  ravenClientInstance,
 		}
 
 	})
 
 	return ErrorHandlerInstance
 }
-
 
 func (eh *ErrorHandler) ErrorNoSentry(err error) ErrorDto {
 	rawErrorMsg := err.Error()
