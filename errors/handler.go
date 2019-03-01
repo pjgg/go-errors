@@ -1,12 +1,13 @@
 package errors
 
 import (
+	"os"
 	"strconv"
 	"strings"
 	"sync"
 
-	"github.com/sirupsen/logrus"
 	"github.com/getsentry/raven-go"
+	"github.com/sirupsen/logrus"
 )
 
 // ErrorHandler defines an instance for rendering errors
@@ -14,6 +15,7 @@ type ErrorHandler struct {
 	Values               map[string]ErrorDto
 	defaultError         string
 	enableReportToSentry bool
+	RavenClientInstance  *raven.Client
 }
 
 // ErrorHandlerBehavior wraps all errors for easier message access
@@ -25,19 +27,27 @@ type ErrorHandlerBehavior interface {
 var once sync.Once
 var ErrorHandlerInstance *ErrorHandler
 
-// NewErrorHandler returns a global ErrorHandler instance
-func NewErrorHandler(enviroment, sentryDSN, version string, reportToSentry bool) *ErrorHandler {
+// GetInstance returns a global ErrorHandler instance
+func GetInstance(enviroment, sentryDSN, version string, reportToSentry bool) *ErrorHandler {
 
 	once.Do(func() {
 
-		raven.SetEnvironment(enviroment)
-		raven.SetDSN(sentryDSN)
-		raven.SetRelease(version)
+		var err error
+		var ravenClientInstance *raven.Client
+		if ravenClientInstance, err = raven.New(sentryDSN); err != nil {
+			logrus.Panic(err.Error())
+			os.Exit(2)
+		}
+
+		ravenClientInstance.SetEnvironment(enviroment)
+		ravenClientInstance.SetDSN(sentryDSN)
+		ravenClientInstance.SetRelease(version)
 
 		ErrorHandlerInstance = &ErrorHandler{
 			Values:               values,
 			defaultError:         "MM0000000",
 			enableReportToSentry: reportToSentry,
+			RavenClientInstance:  ravenClientInstance,
 		}
 
 	})
@@ -82,7 +92,7 @@ func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
 	tags["sentryCode"] = errorDto.SentryCode
 
 	if eh.enableReportToSentry {
-		go func() { raven.CaptureErrorAndWait(err, tags) }()
+		go func() { eh.RavenClientInstance.CaptureError(err, tags) }()
 	}
 	return errorDto
 }
