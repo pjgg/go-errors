@@ -11,7 +11,7 @@ make all
 2. Install
 
 ```Terminal
-go get github.com/pjgg/go-errors
+go get github.com/masmovil/go-errors
 ```
 
 3. how to use it
@@ -21,7 +21,7 @@ Firstly you should init your errorHandler (that is linked to a sentry account)
 
 ```go
 var enviroment = "QA"
-var sentryDns = "https://1eecf0d5795b4f9bbc5f4210c1513f4c:35ae8d2ab04144d8a01127612ed810d9@sentry.bq.com/132"
+var sentryDns = "https://xxxxx:xxxxx@sentry.masmovil.com/132"
 var version = "0.0.1"
 
 errorHandler := NewErrorHandler(enviroment, sentryDns, version)
