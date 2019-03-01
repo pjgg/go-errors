@@ -35,7 +35,7 @@ func GetInstance(enviroment, sentryDSN, version string, reportToSentry bool) *Er
 		var err error
 		var ravenClientInstance *raven.Client
 		if ravenClientInstance, err = raven.New(sentryDSN); err != nil {
-			logrus.Error(err.Error())
+			logrus.Panic(err.Error())
 			os.Exit(2)
 		}
 
