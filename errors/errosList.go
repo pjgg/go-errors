@@ -101,4 +101,14 @@ var values = map[string]ErrorDto{
 		Status: 409,
 		Msg:    "Notification conflict",
 	},
+	"MM0000020": ErrorDto{
+		ID:     "MM0000020",
+		Status: 504,
+		Msg:    "Gateway Timeout",
+	},
+	"MM0000021": ErrorDto{
+		ID:     "MM0000021",
+		Status: 504,
+		Msg:    "Bad Gateway",
+	},
 }
