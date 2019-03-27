@@ -181,6 +181,24 @@ func (suite *ErrorTestSuite) TestNotificationConflictError() {
 	assert.Equal(suite.T(), ErrNotificationConflict+"|"+suite.notificationConflictError.err.Error()+"|"+suite.notificationConflictError.requestID, result)
 }
 
+func (suite *ErrorTestSuite) TestGatewayTimeoutError() {
+
+	// invoke
+	var result = suite.gatewayTimeoutError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrGatewayTimeout+"|"+suite.gatewayTimeoutError.err.Error()+". "+suite.gatewayTimeoutError.message+"|"+suite.gatewayTimeoutError.requestID, result)
+}
+
+func (suite *ErrorTestSuite) TestBadGatewayError() {
+
+	// invoke
+	var result = suite.badGatewayError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrBadGateway+"|"+suite.badGatewayError.err.Error()+"|"+suite.badGatewayError.requestID, result)
+}
+
 type ErrorTestSuite struct {
 	suite.Suite
 	resourceNotFoundError             *ResourceNotFoundError
@@ -202,6 +220,8 @@ type ErrorTestSuite struct {
 	errInvalidAuthorizationTokenError *InvalidAuthorizationTokenError
 	errTokenExpiresError              *TokenExpiresError
 	notificationConflictError         *NotificationConflictError
+	gatewayTimeoutError               *GatewayTimeoutError
+	badGatewayError                   *BadGatewayError
 }
 
 func (suite *ErrorTestSuite) SetupTest() {
@@ -224,6 +244,8 @@ func (suite *ErrorTestSuite) SetupTest() {
 	suite.errInvalidAuthorizationTokenError = &InvalidAuthorizationTokenError{err: errors.New("invalid authorization token"), requestID: "MockID"}
 	suite.errTokenExpiresError = &TokenExpiresError{err: errors.New("token expires"), requestID: "MockID"}
 	suite.notificationConflictError = &NotificationConflictError{err: errors.New("resource conflict error"), requestID: "MockID"}
+	suite.gatewayTimeoutError = &GatewayTimeoutError{err: errors.New("Gateway Timeout"), message: "custom msg", requestID: "MockID"}
+	suite.badGatewayError = &BadGatewayError{err: errors.New("Gateway Timeout"), requestID: "MockID"}
 }
 
 func TestErrorTestSuite(t *testing.T) {

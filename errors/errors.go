@@ -21,6 +21,8 @@ const (
 	ErrInvalidAuthorizationToken = "MM0000017"
 	ErrTokenExpires              = "MM0000018"
 	ErrNotificationConflict      = "MM0000019"
+	ErrGatewayTimeout            = "MM0000020"
+	ErrBadGateway                = "MM0000021"
 )
 
 // CustomError wraps any error message
@@ -296,4 +298,31 @@ func NewNotificationConflictError(err error, requestId string) *NotificationConf
 
 func (notificationConflictError *NotificationConflictError) Error() string {
 	return ErrNotificationConflict + "|" + notificationConflictError.err.Error() + "|" + notificationConflictError.requestID
+}
+
+type GatewayTimeoutError struct {
+	err       error
+	message   string
+	requestID string
+}
+
+func NewGatewayTimeoutError(err error, message, requestId string) *GatewayTimeoutError {
+	return &GatewayTimeoutError{err, message, requestId}
+}
+
+func (errGatewayTimeout *GatewayTimeoutError) Error() string {
+	return ErrGatewayTimeout + "|" + errGatewayTimeout.err.Error() + ". " + errGatewayTimeout.message + "|" + errGatewayTimeout.requestID
+}
+
+type BadGatewayError struct {
+	err       error
+	requestID string
+}
+
+func NewBadGatewayError(err error, requestId string) *BadGatewayError {
+	return &BadGatewayError{err, requestId}
+}
+
+func (errBadGateway *BadGatewayError) Error() string {
+	return ErrBadGateway + "|" + errBadGateway.err.Error() + "|" + errBadGateway.requestID
 }
